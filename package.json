@@ -1,0 +1,36 @@
+{
+  "name": "testes_qa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:api && npm run test:ui",
+    "test:all": "npm run test:api && npm run test:ui",
+    "test:api": "cypress run --spec 'cypress/e2e/features/api/**/*.feature'",
+    "test:ui": "cypress run --spec 'cypress/e2e/features/frontend/**/*.feature'",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gee152/testes_QA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gee152/testes_QA/issues"
+  },
+  "homepage": "https://github.com/Gee152/testes_QA#readme",
+  "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.3.1",
+    "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "@faker-js/faker": "^9.9.0",
+    "@types/node": "^26.6.5",
+    "cypress": "^13.17.0",
+    "esbuild": "^0.21.5",
+    "typescript": "^5.9.3"
+  }
+}
