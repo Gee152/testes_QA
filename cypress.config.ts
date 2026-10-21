@@ -12,6 +12,13 @@ export default defineConfig({
     viewportHeight: 800,
     defaultCommandTimeout: 10000,
     pageLoadTimeout: 30000,
+    blockHosts: [
+      '*google-analytics.com',
+      '*googlesyndication.com',
+      '*doubleclick.net',
+      '*id5-sync.com',
+      '*amazon-adsystem.com',
+    ],
     video: false,
     screenshotOnRunFailure: false,
     experimentalRunAllSpecs: false,

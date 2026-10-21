@@ -11,7 +11,8 @@ export class ProgressBarPage {
   }
 
   startAndStopBefore25() {
-    cy.get('#startStopButton').click()
+    cy.cleanDemoQABanners()
+    cy.get('#startStopButton').scrollIntoView().should('be.visible').click()
     cy.get('div[role="progressbar"]').should(($el) => {
       const val = parseInt($el.attr('aria-valuenow') || '0', 10)
       expect(val).to.be.greaterThan(0)
@@ -26,11 +27,14 @@ export class ProgressBarPage {
     cy.cleanDemoQABanners()
     cy.get('#startStopButton').then(($btn) => {
       if ($btn.text().includes('Start')) {
-        cy.wrap($btn).click({ force: true })
+        cy.wrap($btn).click()
       }
     })
     cy.get('div[role="progressbar"]', { timeout: 20000 }).should('have.attr', 'aria-valuenow', '100')
-    cy.get('#resetButton', { timeout: 10000 }).should('be.visible').click({ force: true })
+    // Aguarda o ciclo interno do DemoQA ultrapassar 100 (r > 100) para invocar clearInterval(this.timer)
+    cy.wait(400)
+    cy.cleanDemoQABanners()
+    cy.get('#resetButton', { timeout: 10000 }).scrollIntoView().should('be.visible').click()
   }
 
   executeFullCycleWithPauseAndReset() {
@@ -45,5 +49,6 @@ export class ProgressBarPage {
 
   validateReset() {
     cy.get('div[role="progressbar"]', { timeout: 10000 }).should('have.attr', 'aria-valuenow', '0')
+    cy.get('#startStopButton', { timeout: 10000 }).should('be.visible')
   }
 }
